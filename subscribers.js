@@ -14,14 +14,12 @@ router.post("/api/add-subscribers", (req, res) => {
         res.json({subscribe : false, message: 'Already subscribed!'});
     };
 
-    const sql = "INSERT INTO subscribers(email) VALUES(?)";
+    const sql = "INSERT INTO subscribers(email)VALUES(?)";
     const proccess = db.prepare(sql);
     const result = proccess.run(email);
 
-    if(result.length > 0){
+    if(result){
         res.json({ subscribe : true, message: 'Subscribed successfully'});
-    }else{
-        res.json({subscribe : false, message: 'Subscribtion failed!'});
     };
 });
 
